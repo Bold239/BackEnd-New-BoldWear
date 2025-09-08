@@ -1,11 +1,9 @@
 import AdminJS, {
-  ActionContext,
-  ActionRequest,
   ActionResponse,
   BaseRecord,
 } from 'adminjs';
 import AdminJSExpress from '@adminjs/express';
-import { Database, Resource } from '@adminjs/sequelize';
+import AdminJSSequelize from '@adminjs/sequelize';
 import bcrypt from 'bcrypt';
 
 import { User } from '../models/user.model.js';
@@ -24,9 +22,13 @@ import { ModelPhoto } from '../models/model-photo.model.js';
 import { Modeling } from '../models/modeling.model.js';
 import { Color } from '../models/color.model.js';
 
-AdminJS.registerAdapter({ Database, Resource });
+AdminJS.registerAdapter({
+  Database: AdminJSSequelize.Database,
+  Resource: AdminJSSequelize.Resource,
+});
 
-const adminJs = new AdminJS({
+
+export const adminJs = new AdminJS({
   rootPath: '/admin',
   resources: [
     {
@@ -337,7 +339,7 @@ const adminJs = new AdminJS({
   },
 });
 
-const adminRouter = AdminJSExpress.buildAuthenticatedRouter(
+export const adminRouter = AdminJSExpress.buildAuthenticatedRouter(
   adminJs,
   {
     authenticate: async (email: string, password: string) => {
@@ -356,5 +358,3 @@ const adminRouter = AdminJSExpress.buildAuthenticatedRouter(
     saveUninitialized: true,
   }
 );
-
-module.exports = { adminJs, adminRouter };

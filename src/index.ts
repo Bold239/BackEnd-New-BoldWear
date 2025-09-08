@@ -7,8 +7,7 @@ import cors from 'cors';
 import express from 'express';
 import { sequelize } from './config/database.js';
 import { createDefaultAdmin } from './config/createDefaultAdmin.js';
-
-const { adminJs, adminRouter } = require('./admin/admin.js');
+import { adminJs, adminRouter } from './admin/admin.js';
 import authRoutes from './routes/auth.routes.js';
 import productRoutes from './routes/product.routes.js';
 import categoryRoutes from './routes/category.routes.js';
@@ -25,6 +24,9 @@ import bannerRoutes from "./routes/banner.routes.js";
 import miniBannerRoutes from './routes/mini-banner.routes.js';
 import fs from 'fs';
 import path from 'path';
+import { fileURLToPath } from 'url';
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 const app = express();
 
@@ -72,8 +74,9 @@ const start = async () => {
       fs.mkdirSync(uploadPath, { recursive: true });
     }
 
-    app.listen(process.env.PORT || 5432, () => {
-      console.log(`Servidor rodando em ${process.env.BACKEND_URL} 🚀`);
+    const port = Number(process.env.PORT) || 3333;
+    app.listen(port, '0.0.0.0', () => {
+      console.log(`Servidor rodando na porta ${port} 🚀`);
     });
   } catch (err) {
     console.error('Erro ao conectar no banco:', err);
