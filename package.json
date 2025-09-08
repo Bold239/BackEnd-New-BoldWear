@@ -4,6 +4,7 @@
   "main": "index.js",
   "type": "commonjs",
   "scripts": {
+    "start": "tsx src/index.ts",
     "dev": "tsx watch src/index.ts"
   },
   "keywords": [],
@@ -54,5 +55,8 @@
   "overrides": {
     "react": "16.13.1",
     "react-dom": "16.13.1"
+  },
+  "engines": {
+    "node": "22.x"
   }
 }

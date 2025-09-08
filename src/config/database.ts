@@ -22,13 +22,28 @@ import { ModelPhoto } from '../models/model-photo.model';
 import { Color } from '../models/color.model';
 import { ProductColor } from '../models/product-color.model';
 
-export const sequelize = new Sequelize({
-  dialect: 'postgres',
-  host: process.env.DB_HOST,
-  port: Number(process.env.DB_PORT),
-  username: process.env.DB_USER,
-  password: process.env.DB_PASS,
-  database: process.env.DB_NAME,
-  models: [User, Product, Category, ProductCategory, FavoriteProduct, CartItem, Order, OrderItem, Video, ProductImage, Review, ReviewImage, Banner, MiniBanner, ProductModeling, Modeling, ModelPhoto, Color, ProductColor],
+export const sequelize = new Sequelize(process.env.DATABASE_URL!, {
+  dialect: "postgres",
   logging: false,
+  models: [
+    User,
+    Product,
+    Category,
+    ProductCategory,
+    FavoriteProduct,
+    CartItem,
+    Order,
+    OrderItem,
+    Video,
+    ProductImage,
+    Review,
+    ReviewImage,
+    Banner,
+    MiniBanner,
+    ProductModeling,
+    Modeling,
+    ModelPhoto,
+    Color,
+    ProductColor,
+  ],
 });

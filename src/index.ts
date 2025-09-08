@@ -72,8 +72,8 @@ const start = async () => {
       fs.mkdirSync(uploadPath, { recursive: true });
     }
 
-    app.listen(3333, () => {
-      console.log('Servidor rodando em http://localhost:3333/admin 🚀');
+    app.listen(process.env.PORT || 5432, () => {
+      console.log(`Servidor rodando em ${process.env.BACKEND_URL} 🚀`);
     });
   } catch (err) {
     console.error('Erro ao conectar no banco:', err);
