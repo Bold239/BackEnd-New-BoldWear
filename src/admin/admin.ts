@@ -72,6 +72,43 @@ const BannerResource = {
   ],
 }
 
+const MiniBannerResource = {
+  resource: MiniBanner,
+  options: {
+    navigation: 'Mini Banners',
+    id: 'mini-banners',
+    properties: {
+      imageUrl: {
+        label: 'Caminho da Imagem',
+        isVisible: { list: true, show: true, edit: true },
+      },
+      mimeType: { isVisible: false },
+      size: { isVisible: false },
+      filename: { isVisible: false },
+      bucket: { isVisible: false },
+    },
+  },
+  features: [
+    uploadFeature({
+      provider: {
+        local: {
+          bucket: 'public/uploads',
+        },
+      },
+      properties: {
+        key: 'imageUrl',
+        file: 'uploadImage',
+        mimeType: 'mimeType',
+        bucket: 'bucket',
+        size: 'size',
+        filename: 'filename',
+      },
+      uploadPath: (_record, filename) => `mini-banners/${Date.now()}-${filename}`,
+    }),
+  ],
+}
+
+
 export const adminJs = new AdminJS({
   rootPath: '/admin',
   resources: [
@@ -221,20 +258,7 @@ export const adminJs = new AdminJS({
         },
       },
     },
-    {
-      resource: MiniBanner,
-      options: {
-        navigation: 'Mini Banners',
-        id: 'mini-banners',
-        properties: {
-          imageUrl: {
-            label: 'Caminho da Imagem',
-            isRequired: true,
-            isVisible: { list: true, show: true, edit: true },
-          },
-        },
-      },
-    },
+    MiniBannerResource,
     ProductResource,
     {
       resource: Category,
