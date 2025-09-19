@@ -21,31 +21,61 @@ import { ProductResource } from './product.resource.js';
 import { ModelPhoto } from '../models/model-photo.model.js';
 import { Modeling } from '../models/modeling.model.js';
 import { Color } from '../models/color.model.js';
+import uploadFeature from '@adminjs/upload'
+
 
 AdminJS.registerAdapter({
   Database: AdminJSSequelize.Database,
   Resource: AdminJSSequelize.Resource,
 });
 
+const BannerResource = {
+  resource: Banner,
+  options: {
+    navigation: 'Banner',
+    id: 'banners',
+    properties: {
+      imageUrl: {
+        label: 'Imagem',
+        isVisible: { list: true, edit: true, show: true, filter: false },
+      },
+      titulo: { label: 'Título Secundário' },
+      tituloPrincipal: { label: 'Título Principal' },
+      destaque: { label: 'Destaque (Ex: +10% off)' },
+      subtitulo: { label: 'Subtítulo' },
+      cupom: { label: 'Texto do cupom' },
+
+      // Ocultando os campos extras
+      mimeType: { isVisible: false },
+      size: { isVisible: false },
+      filename: { isVisible: false },
+      bucket: { isVisible: false },
+    }
+  },
+  features: [
+    uploadFeature({
+      provider: {
+        local: {
+          bucket: 'public/uploads',
+        },
+      },
+      properties: {
+        key: 'imageUrl',         // onde será salvo o caminho da imagem
+        file: 'uploadImage',     // campo temporário para upload
+        mimeType: 'mimeType',
+        bucket: 'bucket',
+        size: 'size',
+        filename: 'filename',
+      },
+      uploadPath: (_record, filename) => `banners/temp-${Date.now()}-${filename}`,
+    }),
+  ],
+}
 
 export const adminJs = new AdminJS({
   rootPath: '/admin',
   resources: [
-    {
-      resource: Banner,
-      options: {
-        navigation: 'Banner',
-        id: 'banners',
-        properties: {
-          imageUrl: { label: 'Imagem (URL)', isRequired: true },
-          titulo: { label: 'Título Secundário' },
-          tituloPrincipal: { label: 'Títulao Principal' },
-          destaque: { label: 'Destaque (Ex: +10% off)' },
-          subtitulo: { label: 'Subtítulo' },
-          cupom: { label: 'Texto do cupom' },
-        },
-      },
-    },
+    BannerResource,
     {
       resource: Order,
       options: {
