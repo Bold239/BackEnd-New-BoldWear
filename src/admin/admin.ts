@@ -22,7 +22,7 @@ import { ModelPhoto } from '../models/model-photo.model.js';
 import { Modeling } from '../models/modeling.model.js';
 import { Color } from '../models/color.model.js';
 import uploadFeature from '@adminjs/upload'
-import { videoUploadFeature } from './uploadFeatures.js';
+import { productImageUploadFeature, videoUploadFeature } from './uploadFeatures.js';
 
 
 AdminJS.registerAdapter({
@@ -335,17 +335,23 @@ export const adminJs = new AdminJS({
         id: 'product-images',
         properties: {
           id: { isVisible: false },
-          url: { label: 'URL da Imagem', isRequired: true },
+          url: {
+            label: 'URL da Imagem',
+            isRequired: false,
+            isVisible: { list: false, show: false, edit: false, filter: false },
+          },
           productId: {
             label: 'Produto',
-            reference: 'products',
+            reference: 'Product',
             isRequired: true,
           },
           createdAt: { isVisible: { list: true, show: true, edit: false } },
           updatedAt: { isVisible: { list: true, show: true, edit: false } },
         },
       },
+      features: [productImageUploadFeature],
     },
+
     {
       resource: Review,
       options: {

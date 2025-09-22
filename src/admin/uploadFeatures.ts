@@ -64,3 +64,18 @@ export const videoUploadFeature = uploadFeature({
   },
   uploadPath: (_record, filename) => `videos/${Date.now()}-${filename}`,
 })
+
+export const productImageUploadFeature = uploadFeature({
+  provider: { local: { bucket: uploadPath } },
+  properties: {
+    key: 'url', // campo real no banco
+    file: 'product_image_file',
+    filePath: 'product_image_filePath',
+    filesToDelete: 'product_image_filesToDelete',
+    mimeType: 'product_image_mime',
+    bucket: 'product_image_bucket',
+    size: 'product_image_size',
+    filename: 'product_image_filename',
+  },
+  uploadPath: (_record, filename) => `product-images/${Date.now()}-${filename}`,
+})

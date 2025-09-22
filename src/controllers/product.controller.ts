@@ -55,24 +55,39 @@ export const getFeaturedProducts = async (req: Request, res: Response): Promise<
     return res.status(500).json({ message: 'Erro ao buscar lançamentos', error: err })
   }
 }
-
 export const getProductById = async (req: Request, res: Response): Promise<Response> => {
   try {
-    const { id } = req.params
+    const { id } = req.params;
 
     const product = await Product.findByPk(id, {
-      include: [ProductImage, { model: Category, as: 'categories' }],
-    })
+      include: [
+        { model: ProductImage, as: 'images' },
+        { model: Category, as: 'categories' },
+      ],
+    });
 
     if (!product) {
-      return res.status(404).json({ error: 'Produto não encontrado' })
+      return res.status(404).json({ error: 'Produto não encontrado' });
     }
 
-    return res.status(200).json({ product })
+    const baseUrl = `${req.protocol}://${req.get('host')}`;
+
+    const transformedImages = product.images?.map((img) => ({
+      ...img.toJSON(),
+      url: `${baseUrl}/uploads/${img.url}`,
+    }));
+
+    const transformedProduct = {
+      ...product.toJSON(),
+      images: transformedImages,
+    };
+
+    return res.status(200).json({ product: transformedProduct });
   } catch (error) {
-    return res.status(500).json({ error: 'Erro interno do servidor' })
+    console.error('Erro ao buscar produto:', error);
+    return res.status(500).json({ error: 'Erro interno do servidor' });
   }
-}
+};
 export const getModelPhotosByProduct = async (req: Request, res: Response): Promise<Response> => {
   const productId = Number(req.params.id);
 

@@ -5,9 +5,10 @@ import { Product } from './product.model'
 export class ProductImage extends Model {
   @Column({
     type: DataType.STRING,
-    allowNull: false,
+    allowNull: true, // <- agora opcional
   })
   url!: string
+
 
   @ForeignKey(() => Product)
   @Column({

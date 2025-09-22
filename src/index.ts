@@ -43,6 +43,7 @@ app.use(cors({
 app.use(adminJs.options.rootPath, adminRouter);
 
 // Pastas públicas
+app.use(express.static(path.join(__dirname, '..', 'public')))
 app.use('/uploads', express.static(path.join(__dirname, '..', 'public', 'uploads')));
 app.use('/videos', express.static(path.join(__dirname, '..', 'public', 'videos')));
 app.use('/reviews', express.static(path.join(__dirname, '..', 'public', 'reviews')));
