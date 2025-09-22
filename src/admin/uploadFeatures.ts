@@ -50,3 +50,17 @@ export const measureTableUploadFeature = uploadFeature({
   uploadPath: (_record, filename) => `measureTableUrl/${Date.now()}-${filename}`,
 })
 
+export const videoUploadFeature = uploadFeature({
+  provider: { local: { bucket: uploadPath } },
+  properties: {
+    key: 'url', // campo real no banco
+    file: 'video_file', // campo virtual para upload
+    filePath: 'video_filePath',
+    filesToDelete: 'video_filesToDelete',
+    mimeType: 'video_mime',
+    bucket: 'video_bucket',
+    size: 'video_size',
+    filename: 'video_filename',
+  },
+  uploadPath: (_record, filename) => `videos/${Date.now()}-${filename}`,
+})

@@ -22,6 +22,7 @@ import { ModelPhoto } from '../models/model-photo.model.js';
 import { Modeling } from '../models/modeling.model.js';
 import { Color } from '../models/color.model.js';
 import uploadFeature from '@adminjs/upload'
+import { videoUploadFeature } from './uploadFeatures.js';
 
 
 AdminJS.registerAdapter({
@@ -316,11 +317,16 @@ export const adminJs = new AdminJS({
         properties: {
           id: { isVisible: false },
           title: { label: 'Título', isRequired: true },
-          filename: { label: 'Arquivo de Vídeo', isVisible: { list: false, show: true, edit: true, filter: false } },
+          url: {
+            label: 'Arquivo de Vídeo',
+            isRequired: false, // <- isso aqui desativa a obrigatoriedade no AdminJS
+            isVisible: { list: false, show: false, edit: false, filter: false },
+          },
           createdAt: { label: 'Criado em', isVisible: { list: true, show: true, edit: false } },
           updatedAt: { label: 'Atualizado em', isVisible: { list: true, show: true, edit: false } },
         },
       },
+      features: [videoUploadFeature],
     },
     {
       resource: ProductImage,

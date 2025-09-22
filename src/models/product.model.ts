@@ -36,7 +36,7 @@ export class Product extends Model {
   @Column({ type: DataType.TEXT, allowNull: false })
   description!: string;
 
-  @Column({ type: DataType.STRING, allowNull: false, field: 'image' })
+  @Column({ type: DataType.STRING, allowNull: true, field: 'image' })
   imagePath!: string;
 
   @Column(DataType.STRING)
@@ -47,7 +47,7 @@ export class Product extends Model {
 
   @Column({ type: DataType.BOOLEAN, allowNull: false, defaultValue: false })
   isFeatured!: boolean;
-  
+
   @Column(DataType.STRING)
   obs?: string;
 
