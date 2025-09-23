@@ -22,7 +22,7 @@ import { ModelPhoto } from '../models/model-photo.model.js';
 import { Modeling } from '../models/modeling.model.js';
 import { Color } from '../models/color.model.js';
 import uploadFeature from '@adminjs/upload'
-import { productImageUploadFeature, videoUploadFeature } from './uploadFeatures.js';
+import { categoryBannerUploadFeature, modelPhotoUploadFeature, productImageUploadFeature, videoUploadFeature } from './uploadFeatures.js';
 
 
 AdminJS.registerAdapter({
@@ -209,11 +209,16 @@ export const adminJs = new AdminJS({
     },
     {
       resource: ModelPhoto,
+      features: [modelPhotoUploadFeature],
       options: {
         navigation: 'Foto Dos Modelos',
         id: 'model-photos',
         properties: {
-          url: { label: 'Imagem da Modelagem', isRequired: true },
+          url: {
+            label: 'Imagem da Modelagem',
+            isRequired: false, // 👈 remove obrigatoriedade no AdminJS
+            isVisible: { list: true, show: true, edit: false, filter: false }, // 👈 oculta no formulário
+          },
           productId: { label: 'Produto', reference: 'Product', isRequired: true },
           modelingId: { label: 'Nome da Modelagem', reference: 'modelings', isRequired: true },
         },
@@ -263,15 +268,14 @@ export const adminJs = new AdminJS({
     ProductResource,
     {
       resource: Category,
+      features: [categoryBannerUploadFeature],
       options: {
         navigation: 'Categorias',
         id: 'categories',
         properties: {
           name: { isTitle: true, label: 'Nome da Categoria', isRequired: true },
           bannerUrl: {
-            label: 'Banner da Categoria (URL)',
-            position: 2,
-            type: 'string',
+            label: 'Banner da Categoria',
             isVisible: { list: true, show: true, edit: true, filter: false },
           },
           productNames: {

@@ -101,7 +101,7 @@ export const getModelPhotosByProduct = async (req: Request, res: Response): Prom
 
     const transformed = photos.map((photo) => ({
       ...photo.toJSON(),
-      url: photo.url.startsWith('http') ? photo.url : `${baseUrl}${photo.url.startsWith('/') ? '' : '/'}${photo.url}`
+      url: `${baseUrl}/uploads/${photo.url}`,
     }));
 
     return res.json(transformed);

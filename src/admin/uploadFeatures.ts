@@ -79,3 +79,33 @@ export const productImageUploadFeature = uploadFeature({
   },
   uploadPath: (_record, filename) => `product-images/${Date.now()}-${filename}`,
 })
+
+export const categoryBannerUploadFeature = uploadFeature({
+  provider: { local: { bucket: uploadPath } },
+  properties: {
+    key: 'bannerUrl', // campo real no banco
+    file: 'bannerUrl_file',
+    filePath: 'bannerUrl_filePath',
+    filesToDelete: 'bannerUrl_filesToDelete',
+    mimeType: 'bannerUrl_mime',
+    bucket: 'bannerUrl_bucket',
+    size: 'bannerUrl_size',
+    filename: 'bannerUrl_filename',
+  },
+  uploadPath: (_record, filename) => `category-banners/${Date.now()}-${filename}`,
+});
+
+export const modelPhotoUploadFeature = uploadFeature({
+  provider: { local: { bucket: uploadPath } },
+  properties: {
+    key: 'url', // campo real no banco
+    file: 'modelPhoto_file',
+    filePath: 'modelPhoto_filePath',
+    filesToDelete: 'modelPhoto_filesToDelete',
+    mimeType: 'modelPhoto_mime',
+    bucket: 'modelPhoto_bucket',
+    size: 'modelPhoto_size',
+    filename: 'modelPhoto_filename',
+  },
+  uploadPath: (_record, filename) => `model-photos/${Date.now()}-${filename}`,
+});

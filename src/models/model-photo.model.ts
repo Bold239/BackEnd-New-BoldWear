@@ -28,8 +28,8 @@ export class ModelPhoto extends Model {
   @BelongsTo(() => Modeling)
   modeling!: Modeling;
 
-  @Column({ type: DataType.STRING, allowNull: false })
-  url!: string;
+  @Column({ type: DataType.STRING, allowNull: true })
+  url?: string;
 
   @CreatedAt
   createdAt!: Date;

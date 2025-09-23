@@ -41,7 +41,19 @@ import Component20 from '../node_modules/@adminjs/upload/src/features/upload-fil
 AdminJS.UserComponents.Component20 = Component20
 import Component21 from '../node_modules/@adminjs/upload/src/features/upload-file/components/show'
 AdminJS.UserComponents.Component21 = Component21
-import Component22 from '../src/admin/components/ColorPreview'
+import Component22 from '../node_modules/@adminjs/upload/src/features/upload-file/components/edit'
 AdminJS.UserComponents.Component22 = Component22
-import Component23 from '../src/admin/components/ColorPreview'
+import Component23 from '../node_modules/@adminjs/upload/src/features/upload-file/components/list'
 AdminJS.UserComponents.Component23 = Component23
+import Component24 from '../node_modules/@adminjs/upload/src/features/upload-file/components/show'
+AdminJS.UserComponents.Component24 = Component24
+import Component25 from '../node_modules/@adminjs/upload/src/features/upload-file/components/edit'
+AdminJS.UserComponents.Component25 = Component25
+import Component26 from '../node_modules/@adminjs/upload/src/features/upload-file/components/list'
+AdminJS.UserComponents.Component26 = Component26
+import Component27 from '../node_modules/@adminjs/upload/src/features/upload-file/components/show'
+AdminJS.UserComponents.Component27 = Component27
+import Component28 from '../src/admin/components/ColorPreview'
+AdminJS.UserComponents.Component28 = Component28
+import Component29 from '../src/admin/components/ColorPreview'
+AdminJS.UserComponents.Component29 = Component29
