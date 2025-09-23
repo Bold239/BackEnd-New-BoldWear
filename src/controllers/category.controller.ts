@@ -62,7 +62,25 @@ export const getCategoriesWithProducts = async (req: Request, res: Response): Pr
       ],
     });
 
-    res.status(200).json(categories);
+    const baseUrl = `${req.protocol}://${req.get('host')}`;
+
+    const transformed = categories.map((category) => {
+      const raw = category.toJSON();
+
+      return {
+        ...raw,
+        products: Array.isArray(raw.products)
+          ? raw.products.map((product: Product) => ({
+              ...product,
+              imagePath: `${baseUrl}/uploads/${product.imagePath
+                .replace(/^imagePath:/, '')
+                .replace(/^\/+/, '')}`,
+            }))
+          : [],
+      };
+    });
+
+    res.status(200).json(transformed);
   } catch (error) {
     res.status(500).json({
       message: 'Erro ao buscar categorias com produtos',
@@ -70,6 +88,7 @@ export const getCategoriesWithProducts = async (req: Request, res: Response): Pr
     });
   }
 };
+
 
 
 export const getCategoryByName = async (req: Request, res: Response): Promise<void> => {

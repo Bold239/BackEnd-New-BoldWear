@@ -6,90 +6,107 @@ import AdminJS, {
     ActionContext,
     BaseRecord,
 } from 'adminjs';
-import { Modeling } from '../models/modeling.model';
-import { Color } from '../models/color.model';
+import {
+  imagePathUploadFeature,
+  measureTableUploadFeature,
+  fullWidthImageUploadFeature,
+} from './uploadFeatures';
+
 
 export const ProductResource = {
-    resource: Product,
-    options: {
-        id: 'Product',
-        navigation: 'Produtos',
-        properties: {
-            id: { isVisible: false },
-            name: { position: 1, label: 'Nome', isRequired: true },
-            price: { position: 2, label: 'Preço', type: 'number', isRequired: true },
-            description: { position: 3, label: 'Descrição', type: 'textarea', isRequired: true },
-            imagePath: { position: 4, label: 'Imagem (URL)', isRequired: true },
+   resource: Product,
+  features: [
+    imagePathUploadFeature,
+    measureTableUploadFeature,
+    fullWidthImageUploadFeature,
+  ],
+  options: {
+    id: 'Product',
+    navigation: 'Produtos',
+    properties: {
+      id: { isVisible: false },
+      name: { position: 1, label: 'Nome', isRequired: true },
+      price: { position: 2, label: 'Preço', type: 'number', isRequired: true },
+      description: { position: 3, label: 'Descrição', type: 'textarea', isRequired: true },
 
-            categories: {
-                position: 5,
-                label: 'Categorias',
-                isArray: true,
-                reference: 'categories',
-                isVirtual: true,
-                isVisible: {
-                    list: false,
-                    edit: true,
-                    show: false,
-                    filter: true,
-                },
-            },
+      imagePath: {
+        position: 4,
+        label: 'Imagem Principal',
+        isRequired: false,
+        isVisible: { list: true, show: true, edit: false, filter: false },
+      },
+      measureTableUrl: {
+        position: 13,
+        label: 'Tabela de Medidas',
+        isRequired: false,
+        isVisible: { list: false, show: true, edit: false, filter: false },
+      },
+      fullWidthImageUrl: {
+        position: 14,
+        label: 'Imagem em Largura Total',
+        isRequired: false,
+        isVisible: { list: false, show: true, edit: false, filter: false },
+      },
 
-            categoryNames: {
-                position: 6,
-                label: 'Categorias',
-                isVisible: {
-                    list: true,
-                    show: true,
-                    edit: false,
-                    filter: false,
-                },
-            },
-
-            isFeatured: {
-                position: 7,
-                label: 'Produto em Destaque?',
-                type: 'boolean',
-            },
-
-            obs: {
-                position: 8,
-                label: 'Observações',
-                isVisible: { list: true, edit: true, show: true, filter: true },
-            },
-
-            colors: {
-                position: 10,
-                label: 'Cores',
-                isArray: true,
-                reference: 'colors',
-                isVisible: { list: false, edit: true, show: false, filter: false },
-            },
-
-            colorNames: {
-                position: 11,
-                label: 'Cores Selecionadas',
-                isVisible: { list: true, show: true, edit: false },
-            },
-
-
-            modelingNames: {
-                position: 12,
-                label: 'Modelagens Selecionadas',
-                isVisible: { list: true, show: true, edit: false },
-            },
-
-            createdAt: {
-                isVisible: { list: true, edit: false, show: true },
-                label: 'Criado em',
-            },
-
-            updatedAt: {
-                isVisible: { list: true, edit: false, show: true },
-                label: 'Atualizado em',
-            },
+      categories: {
+        position: 5,
+        label: 'Categorias',
+        isArray: true,
+        reference: 'categories',
+        isVirtual: true,
+        isVisible: {
+          list: false,
+          edit: true,
+          show: false,
+          filter: true,
         },
-
+      },
+      categoryNames: {
+        position: 6,
+        label: 'Categorias',
+        isVisible: {
+          list: true,
+          show: true,
+          edit: false,
+          filter: false,
+        },
+      },
+      isFeatured: {
+        position: 7,
+        label: 'Produto em Destaque?',
+        type: 'boolean',
+      },
+      obs: {
+        position: 8,
+        label: 'Observações',
+        isVisible: { list: true, edit: true, show: true, filter: true },
+      },
+      colors: {
+        position: 10,
+        label: 'Cores',
+        isArray: true,
+        reference: 'colors',
+        isVisible: { list: false, edit: true, show: false, filter: false },
+      },
+      colorNames: {
+        position: 11,
+        label: 'Cores Selecionadas',
+        isVisible: { list: true, show: true, edit: false },
+      },
+      modelingNames: {
+        position: 12,
+        label: 'Modelagens Selecionadas',
+        isVisible: { list: true, show: true, edit: false },
+      },
+      createdAt: {
+        isVisible: { list: true, edit: false, show: true },
+        label: 'Criado em',
+      },
+      updatedAt: {
+        isVisible: { list: true, edit: false, show: true },
+        label: 'Atualizado em',
+      },
+    },
         actions: {
             new: {
                 before: async (request: ActionRequest, context: ActionContext): Promise<ActionRequest> => {
