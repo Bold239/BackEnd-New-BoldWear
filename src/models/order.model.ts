@@ -57,4 +57,7 @@ export class Order extends Model {
 
   @Column(DataType.FLOAT)
   freight!: number;
+
+  @Column({ type: DataType.STRING, allowNull: true })
+  recipientEmail?: string;
 }

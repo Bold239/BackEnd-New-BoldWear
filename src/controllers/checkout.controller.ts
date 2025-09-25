@@ -27,6 +27,7 @@ export const checkout = async (req: Request, res: Response): Promise<void> => {
       recipientName,
       recipientCPF,
       recipientCEP,
+      recipientEmail, // ✅ Adicionado
       extraInfo,
     } = req.body;
 
@@ -35,6 +36,7 @@ export const checkout = async (req: Request, res: Response): Promise<void> => {
       res.status(400).json({ message: 'Método de pagamento inválido ou ausente.' });
       return;
     }
+
 
     if (!shippingAddress || typeof shippingAddress !== 'string') {
       res.status(400).json({ message: 'Endereço de entrega inválido ou ausente.' });
@@ -50,6 +52,12 @@ export const checkout = async (req: Request, res: Response): Promise<void> => {
       res.status(400).json({ message: 'Dados do destinatário incompletos.' });
       return;
     }
+
+    if (!recipientEmail || typeof recipientEmail !== 'string') {
+      res.status(400).json({ message: 'E-mail do destinatário ausente ou inválido.' });
+      return;
+    }
+
 
     const cartItems = await CartItem.findAll({
       where: { userId },
@@ -84,8 +92,10 @@ export const checkout = async (req: Request, res: Response): Promise<void> => {
       recipientName,
       recipientCPF,
       recipientCEP,
+      recipientEmail, // ✅ Adicionado
       extraInfo,
     });
+
 
     for (const item of cartItems) {
       let modelName: string | undefined;

@@ -25,6 +25,7 @@ import uploadFeature from '@adminjs/upload'
 import { categoryBannerUploadFeature, modelPhotoUploadFeature, productImageUploadFeature, videoUploadFeature } from './uploadFeatures.js';
 
 
+AdminJS.bundle('./components/OpenPdf.tsx');
 AdminJS.registerAdapter({
   Database: AdminJSSequelize.Database,
   Resource: AdminJSSequelize.Resource,
@@ -133,6 +134,11 @@ export const adminJs = new AdminJS({
           createdAt: {
             isVisible: { list: true, edit: false, show: true },
             label: 'Criado em',
+          },
+          recipientEmail: {
+            label: 'E-mail do Destinatário',
+            isVisible: { list: true, show: true, edit: false, filter: true },
+            position: 5, // ou qualquer posição que organize bem no painel
           },
         },
       },

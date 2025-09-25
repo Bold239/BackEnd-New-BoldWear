@@ -47,6 +47,7 @@ app.use(express.static(path.join(__dirname, '..', 'public')))
 app.use('/uploads', express.static(path.join(__dirname, '..', 'public', 'uploads')));
 app.use('/videos', express.static(path.join(__dirname, '..', 'public', 'videos')));
 app.use('/reviews', express.static(path.join(__dirname, '..', 'public', 'reviews')));
+app.use('/exports', express.static(path.join(__dirname, '..', 'public', 'exports')));
 
 // Rotas da API
 app.use('/auth', authRoutes);
