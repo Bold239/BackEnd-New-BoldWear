@@ -34,7 +34,7 @@ AdminJS.registerAdapter({
 const BannerResource = {
   resource: Banner,
   options: {
-    navigation: 'Banner',
+    navigation: { name: 'Banners', icon: 'Image' },
     id: 'banners',
     properties: {
       imageUrl: {
@@ -77,7 +77,7 @@ const BannerResource = {
 const MiniBannerResource = {
   resource: MiniBanner,
   options: {
-    navigation: 'Mini Banners',
+    navigation: { name: 'Banners', icon: 'Image' },
     id: 'mini-banners',
     properties: {
       imageUrl: {
@@ -118,7 +118,7 @@ export const adminJs = new AdminJS({
     {
       resource: Order,
       options: {
-        navigation: 'Pedidos',
+        navigation: { name: 'Pedidos', icon: 'ShoppingCart' },
         id: 'orders',
         actions: {
           export_pdf: exportOrderPdf,
@@ -146,7 +146,7 @@ export const adminJs = new AdminJS({
     {
       resource: User,
       options: {
-        navigation: 'Usuários',
+        navigation: { name: 'Usuários', icon: 'User' },
         id: 'users',
         properties: {
           password: {
@@ -217,7 +217,7 @@ export const adminJs = new AdminJS({
       resource: ModelPhoto,
       features: [modelPhotoUploadFeature],
       options: {
-        navigation: 'Foto Dos Modelos',
+        navigation: { name: 'Produtos', icon: 'Box' },
         id: 'model-photos',
         properties: {
           url: {
@@ -233,7 +233,7 @@ export const adminJs = new AdminJS({
     {
       resource: Color,
       options: {
-        navigation: 'Cores',
+        navigation: { name: 'Produtos', icon: 'Box' },
         id: 'colors',
         properties: {
           name: { label: 'Nome da Cor', isRequired: true },
@@ -254,7 +254,7 @@ export const adminJs = new AdminJS({
     {
       resource: Modeling,
       options: {
-        navigation: 'Modelos',
+        navigation: { name: 'Produtos', icon: 'Box' },
         id: 'modelings',
         properties: {
           id: { isVisible: false },
@@ -276,7 +276,7 @@ export const adminJs = new AdminJS({
       resource: Category,
       features: [categoryBannerUploadFeature],
       options: {
-        navigation: 'Categorias',
+        navigation: { name: 'Produtos', icon: 'Box' },
         id: 'categories',
         properties: {
           name: { isTitle: true, label: 'Nome da Categoria', isRequired: true },
@@ -322,7 +322,7 @@ export const adminJs = new AdminJS({
     {
       resource: Video,
       options: {
-        navigation: 'Videos',
+        navigation: { name: 'Conteúdo', icon: 'Document' },
         id: 'videos',
         properties: {
           id: { isVisible: false },
@@ -341,7 +341,7 @@ export const adminJs = new AdminJS({
     {
       resource: ProductImage,
       options: {
-        navigation: 'Imagem dos Produtos',
+        navigation: { name: 'Produtos', icon: 'Box' },
         id: 'product-images',
         properties: {
           id: { isVisible: false },
@@ -365,7 +365,7 @@ export const adminJs = new AdminJS({
     {
       resource: Review,
       options: {
-        navigation: 'Reviews',
+        navigation: { name: 'Conteúdo', icon: 'Document' },
         id: 'reviews',
         properties: {
           rating: {
@@ -384,7 +384,7 @@ export const adminJs = new AdminJS({
     {
       resource: ReviewImage,
       options: {
-        navigation: 'Imagens dos reviews',
+        navigation: { name: 'Conteúdo', icon: 'Document' },
         id: 'review-images',
         properties: {
           url: { label: 'URL da Imagem', isRequired: true },

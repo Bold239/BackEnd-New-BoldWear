@@ -22,7 +22,7 @@ export const ProductResource = {
   ],
   options: {
     id: 'Product',
-    navigation: 'Produtos',
+    navigation: { name: 'Produtos', icon: 'Box' },
     properties: {
       id: { isVisible: false },
       name: { position: 1, label: 'Nome', isRequired: true },
