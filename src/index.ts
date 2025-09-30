@@ -35,7 +35,7 @@ app.use(express.json());
 
 // CORS global (inclui frontend + AdminJS)
 app.use(cors({
-  origin: true, // aceita qualquer origem durante desenvolvimento
+  origin: ['https://www.boldwears.com.br'],
   credentials: true,
 }));
 
